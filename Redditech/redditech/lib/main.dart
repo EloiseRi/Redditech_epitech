@@ -16,7 +16,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
+        '/home': (context) => const HomePage(name: "Noname")
+      },
     );
   }
 }
@@ -33,10 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
   final reddit = Reddit.createInstalledFlowInstance(
     clientId: 'VdlJF8fvv4lIXesUTJA4zA',
     userAgent: 'user-reditech-app',
-    redirectUri: Uri.parse('reditech://success'),
+    redirectUri: Uri.parse('reditech://home'),
   );
 
-  void _launchReddit() async {
+  Future _launchReddit() async {
     final authUrl = reddit.auth
         .url(['*'], 'user-reditech-app', compactLogin: true).toString();
 
@@ -49,6 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
     String authCode = Uri.parse(result).queryParameters["code"].toString();
     await reddit.auth.authorize(authCode);
     print(await reddit.user.me());
+    print('____________');
+    print(reddit.auth.credentials.toJson());
   }
 
   @override
@@ -61,7 +67,42 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextButton(onPressed: () => _launchReddit(), child: Text('LOGIN'))
+            TextButton(
+                onPressed: () async {
+                  await _launchReddit();
+                  Navigator.pushReplacementNamed(context, '/home');
+                },
+                child: const Text('LOGIN'))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key, required this.name}) : super(key: key);
+  final String name;
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("USER CONNECTED"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextButton(
+              onPressed: () => {},
+              child: const Text('Log out'),
+            ),
           ],
         ),
       ),

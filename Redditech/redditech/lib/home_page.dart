@@ -7,7 +7,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -18,8 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
     userAgent: 'user-reditech-app',
     redirectUri: Uri.parse('reditech://home'),
   );
-
-  void _launchReddit() async {
+  Future _launchReddit() async {
     final authUrl = reddit.auth
         .url(['*'], 'user-reditech-app', compactLogin: true).toString();
 
@@ -32,6 +30,8 @@ class _MyHomePageState extends State<MyHomePage> {
     String authCode = Uri.parse(result).queryParameters["code"].toString();
     await reddit.auth.authorize(authCode);
     print(await reddit.user.me());
+    print('____________');
+    print(reddit.auth.credentials.toJson());
   }
 
   @override
@@ -61,7 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: EdgeInsets.all(25.0),
             ),
             TextButton(
-                onPressed: _launchReddit,
+                onPressed: () async {
+                  await _launchReddit();
+                  Navigator.pushReplacementNamed(context, '/home');
+                },
                 child: const Text('LOGIN'),
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(fontSize: 23),

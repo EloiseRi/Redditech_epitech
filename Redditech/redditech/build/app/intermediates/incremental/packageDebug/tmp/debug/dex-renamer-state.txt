@@ -1,0 +1,4 @@
+#Thu Oct 21 20:27:23 CEST 2021
+base.0=/home/alizee/Epitech/3EME_ANNÉE/APPdev/B-DEV-501-NCE-5-1-redditech-alizee.patricola/Redditech/redditech/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_redditech/utils/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:my_redditech/states/global_state.dart';
 
@@ -31,9 +32,9 @@ class _HomePageState extends State<HomePage> {
                 child: const Text('LOG OUT'),
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(fontSize: 23),
-                  minimumSize: const Size(110, 45),
+                  minimumSize: const Size(120, 45),
                   primary: Colors.white,
-                  backgroundColor: const Color.fromARGB(255, 243, 69, 1),
+                  backgroundColor: Palette.orangeReddit,
                 )),
           ],
         ),

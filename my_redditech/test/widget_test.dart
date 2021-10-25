@@ -7,13 +7,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:my_redditech/states/global_state.dart';
 import 'package:my_redditech/main.dart';
 
-void main() {
+void main() async {
+  GlobalState globalState = GlobalState();
+
+  await globalState.initApp();
+
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp(
+      globalState: globalState,
+    ));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

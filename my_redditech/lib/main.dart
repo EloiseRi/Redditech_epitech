@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_redditech/utils/color_chart.dart';
 import 'package:my_redditech/states/global_state.dart';
 import 'package:my_redditech/utils/palette.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +35,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Redditech',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Palette.orangeReddit,
           scaffoldBackgroundColor: Colors.grey.shade200,

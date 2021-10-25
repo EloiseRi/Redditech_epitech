@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:my_redditech/states/global_state.dart';
 import 'package:my_redditech/utils/palette.dart';
 import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);

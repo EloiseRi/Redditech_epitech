@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:my_redditech/utils/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:my_redditech/states/global_state.dart';
@@ -24,7 +27,50 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("USER CONNECTED"),
+        backgroundColor: Colors.white,
+        bottom: PreferredSize(
+          child: Container(),
+          preferredSize: const Size(0, 8),
+        ),
+        title: Container(
+          padding:
+              const EdgeInsets.only(top: 12, bottom: 12, left: 12, right: 50),
+          child: Column(
+            children: const <Widget>[
+              SizedBox(
+                height: 16.0,
+              ),
+              TextField(
+                cursorColor: Colors.grey,
+                decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    prefixIconConstraints: BoxConstraints(
+                      minHeight: 16.0,
+                      minWidth: 38.0,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                    fillColor: Color.fromARGB(40, 20, 20, 20),
+                    filled: true,
+                    isDense: true,
+                    hintText: 'Search ...',
+                    hintStyle: TextStyle(color: Colors.black),
+                    contentPadding: EdgeInsets.all(8.0),
+                    border: OutlineInputBorder()),
+              ),
+            ],
+          ),
+        ),
+        leading: IconButton(
+          padding: const EdgeInsets.only(top: 15, left: 20),
+          onPressed: () {},
+          icon: const Icon(Icons.face),
+          iconSize: 30,
+          color: Colors.black,
+        ),
         centerTitle: true,
       ),
       body: Center(
@@ -43,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                   minimumSize: const Size(120, 45),
                   primary: Colors.white,
                   backgroundColor: Palette.orangeReddit,
-                )),
+                ))
           ],
         ),
       ),

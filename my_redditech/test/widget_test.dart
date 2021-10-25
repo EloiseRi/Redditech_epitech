@@ -8,10 +8,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:my_redditech/states/global_state.dart';
+import 'package:my_redditech/states/subreddits_state.dart';
 import 'package:my_redditech/main.dart';
 
 void main() async {
   GlobalState globalState = GlobalState();
+  SubredditsState subredditsState = SubredditsState();
 
   await globalState.initApp();
 
@@ -19,6 +21,7 @@ void main() async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp(
       globalState: globalState,
+      subredditsState: subredditsState,
     ));
 
     // Verify that our counter starts at 0.

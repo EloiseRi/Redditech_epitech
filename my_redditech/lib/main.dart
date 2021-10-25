@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_redditech/states/global_state.dart';
+import 'package:my_redditech/states/subreddits_state.dart';
 import 'package:my_redditech/utils/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:my_redditech/screens/home_page.dart';
@@ -8,6 +9,7 @@ import 'package:my_redditech/screens/user_page.dart';
 
 Future<void> main() async {
   GlobalState globalState = GlobalState();
+  SubredditsState subredditsState = SubredditsState();
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -17,13 +19,21 @@ Future<void> main() async {
   ));
 
   await globalState.initApp();
-  runApp(MyApp(globalState: globalState));
+  runApp(MyApp(
+    globalState: globalState,
+    subredditsState: subredditsState,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final GlobalState globalState;
+  final SubredditsState subredditsState;
 
-  const MyApp({Key? key, required this.globalState}) : super(key: key);
+  const MyApp({
+    Key? key,
+    required this.globalState,
+    required this.subredditsState,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +42,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<GlobalState>.value(
           value: globalState,
         ),
+        ChangeNotifierProvider<SubredditsState>.value(
+          value: subredditsState,
+        )
       ],
       child: MaterialApp(
         title: 'Redditech',

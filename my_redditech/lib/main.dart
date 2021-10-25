@@ -13,7 +13,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
-    systemNavigationBarColor: rGrey,
+    systemNavigationBarColor: Colors.white,
     systemStatusBarContrastEnforced: false,
   ));
 
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         title: 'Redditech',
         theme: ThemeData(
           primarySwatch: Palette.orangeReddit,
-          scaffoldBackgroundColor: rGrey,
+          scaffoldBackgroundColor: Colors.grey.shade200,
         ),
         initialRoute: '/',
         routes: {

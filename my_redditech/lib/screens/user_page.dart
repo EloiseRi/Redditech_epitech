@@ -44,7 +44,8 @@ class _HomePageState extends State<HomePage> {
                 cursorColor: Colors.grey,
                 decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
                     prefixIconConstraints: BoxConstraints(
                       minHeight: 16.0,
                       minWidth: 38.0,
@@ -59,7 +60,11 @@ class _HomePageState extends State<HomePage> {
                     hintText: 'Search ...',
                     hintStyle: TextStyle(color: Colors.black),
                     contentPadding: EdgeInsets.all(8.0),
-                    border: OutlineInputBorder()),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      ),
+                    )),
               ),
             ],
           ),

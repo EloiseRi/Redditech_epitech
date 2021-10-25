@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:draw/draw.dart';
-import 'package:uuid/uuid.dart';
-import 'package:my_redditech/utils/secrets.dart';
 import 'package:my_redditech/service/reddit_client.dart';
 
 class SubredditsState with ChangeNotifier {

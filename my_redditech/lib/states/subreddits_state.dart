@@ -17,6 +17,17 @@ class SubredditsState with ChangeNotifier {
     return subsNames;
   }
 
+  Future<void> getUserSub() async {
+    List<Multireddit>? multireddits =
+        await redditClient.reddit.user.multireddits();
+    if (multireddits != null) {
+      for (Multireddit multi in multireddits) {
+        String subreddit = multi.subreddits.map((s) => s.displayName).join('+');
+        print(subreddit);
+      }
+    }
+  }
+
   @override
   void notifyListeners();
 }

@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:my_redditech/utils/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:my_redditech/states/global_state.dart';
+import 'package:my_redditech/models/searchbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.name}) : super(key: key);
@@ -30,53 +30,19 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         bottom: PreferredSize(
           child: Container(),
-          preferredSize: const Size(0, 8),
+          preferredSize: const Size(0, 0),
         ),
-        title: Container(
-          padding:
-              const EdgeInsets.only(top: 12, bottom: 12, left: 12, right: 50),
-          child: Column(
-            children: const <Widget>[
-              SizedBox(
-                height: 16.0,
-              ),
-              TextField(
-                cursorColor: Colors.grey,
-                decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    prefixIconConstraints: BoxConstraints(
-                      minHeight: 16.0,
-                      minWidth: 38.0,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
-                    fillColor: Color.fromARGB(40, 20, 20, 20),
-                    filled: true,
-                    isDense: true,
-                    hintText: 'Search ...',
-                    hintStyle: TextStyle(color: Colors.black),
-                    contentPadding: EdgeInsets.all(8.0),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    )),
-              ),
-            ],
-          ),
-        ),
+        title: ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 35, maxWidth: 260),
+            child: const SearchBar()),
+        centerTitle: true,
         leading: IconButton(
-          padding: const EdgeInsets.only(top: 15, left: 20),
+          padding: const EdgeInsets.only(top: 0, left: 12, right: 0),
           onPressed: () {},
           icon: const Icon(Icons.face),
           iconSize: 30,
           color: Colors.black,
         ),
-        centerTitle: true,
       ),
       body: Center(
         child: Column(

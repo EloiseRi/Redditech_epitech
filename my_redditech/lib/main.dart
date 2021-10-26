@@ -9,7 +9,6 @@ import 'package:my_redditech/screens/user_page.dart';
 
 Future<void> main() async {
   GlobalState globalState = GlobalState();
-  SubredditsState subredditsState = SubredditsState();
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -21,18 +20,16 @@ Future<void> main() async {
   await globalState.initApp();
   runApp(MyApp(
     globalState: globalState,
-    subredditsState: subredditsState,
   ));
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  final GlobalState globalState;
-  final SubredditsState subredditsState;
+  GlobalState globalState = GlobalState();
 
-  const MyApp({
+  MyApp({
     Key? key,
     required this.globalState,
-    required this.subredditsState,
   }) : super(key: key);
 
   @override
@@ -43,7 +40,7 @@ class MyApp extends StatelessWidget {
           value: globalState,
         ),
         ChangeNotifierProvider<SubredditsState>.value(
-          value: subredditsState,
+          value: globalState.subredditsState,
         )
       ],
       child: MaterialApp(

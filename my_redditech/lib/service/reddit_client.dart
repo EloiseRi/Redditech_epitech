@@ -40,7 +40,6 @@ class RedditClient {
 
   Future<void> setUsername() async {
     Redditor redditor = await reddit.user.me() as Redditor;
-    print(redditor);
     _username = redditor.displayName;
   }
 }

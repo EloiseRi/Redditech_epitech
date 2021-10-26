@@ -3,8 +3,6 @@ import 'package:draw/draw.dart';
 import 'package:uuid/uuid.dart';
 import 'package:my_redditech/utils/secrets.dart';
 import 'package:my_redditech/service/reddit_client.dart';
-import 'package:provider/provider.dart';
-import 'package:my_redditech/states/global_state.dart';
 import 'package:my_redditech/states/subreddits_state.dart';
 
 class GlobalState with ChangeNotifier {
@@ -16,7 +14,7 @@ class GlobalState with ChangeNotifier {
   late SubredditsState _subredditsState;
 
   Future<void> initApp() async {
-    // print("Initilization of the Reddit client...");
+    print("Initilization of the Reddit client...");
     _redditClient = RedditClient.createInstalledFlow();
 
     _subredditsState = SubredditsState(redditClient: _redditClient);
@@ -25,6 +23,10 @@ class GlobalState with ChangeNotifier {
   Future<void> authorizeClient() async {
     await _redditClient.authorizeClient();
     await _redditClient.setUsername();
+  }
+
+  Future<Redditor> getUserInfo() async {
+    return await _redditClient.getUserInfo();
   }
 
   Future<void> logout() async {

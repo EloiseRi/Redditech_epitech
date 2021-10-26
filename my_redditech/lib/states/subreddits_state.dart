@@ -10,7 +10,9 @@ class SubredditsState with ChangeNotifier {
   Future<List<String>> searchSubreddit(String query) async {
     List<SubredditRef> subs =
         await redditClient.reddit.subreddits.searchByName(query);
-    List<String> subsNames = subs.map((sub) => sub.displayName).toList();
+    List<String> subsNames = subs
+        .map((sub) => (sub.path).substring(0, (sub.path).length - 1))
+        .toList();
 
     return subsNames;
   }

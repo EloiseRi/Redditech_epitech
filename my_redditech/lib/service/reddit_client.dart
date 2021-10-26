@@ -42,4 +42,9 @@ class RedditClient {
     Redditor redditor = await reddit.user.me() as Redditor;
     _username = redditor.displayName;
   }
+
+  Future<Redditor> getUserInfo() async {
+    Redditor redditor = await reddit.user.me() as Redditor;
+    return redditor;
+  }
 }

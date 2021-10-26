@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Redditech',
-        debugShowCheckedModeBanner:  false,
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Palette.orangeReddit,
           scaffoldBackgroundColor: Colors.grey.shade200,

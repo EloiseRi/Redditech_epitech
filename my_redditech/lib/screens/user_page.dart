@@ -1,7 +1,9 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:my_redditech/screens/profil_page.dart';
 import 'package:my_redditech/utils/palette.dart';
+import 'package:provider/provider.dart';
+import 'package:my_redditech/states/global_state.dart';
 import 'package:my_redditech/models/searchbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const NavigationDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.white,
         bottom: PreferredSize(
@@ -35,19 +36,32 @@ class _HomePageState extends State<HomePage> {
             constraints: const BoxConstraints(maxHeight: 35, maxWidth: 260),
             child: const SearchBar()),
         centerTitle: true,
-        leading: Builder(
-          builder: (BuildContext context) => IconButton(
-            padding: const EdgeInsets.only(top: 0, left: 12, right: 0),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-            icon: const Icon(Icons.face),
-            iconSize: 30,
-            color: Colors.black,
-          ),
+        leading: IconButton(
+          padding: const EdgeInsets.only(top: 0, left: 12, right: 0),
+          onPressed: () {},
+          icon: const Icon(Icons.face),
+          iconSize: 30,
+          color: Colors.black,
         ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextButton(
+                onPressed: () async {
+                  await Provider.of<GlobalState>(context, listen: false)
+                      .logout();
+                  Navigator.pushReplacementNamed(context, '/');
+                },
+                child: const Text('LOG OUT'),
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 23),
+                  minimumSize: const Size(120, 45),
+                  primary: Colors.white,
+                  backgroundColor: Palette.orangeReddit,
+                ))
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

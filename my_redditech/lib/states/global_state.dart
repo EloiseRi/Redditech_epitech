@@ -11,7 +11,7 @@ class GlobalState with ChangeNotifier {
   late RedditClient _redditClient;
 
   Future<void> initApp() async {
-    print("Initilization of the Reddit client...");
+    // print("Initilization of the Reddit client...");
     _redditClient = RedditClient.createInstalledFlow();
   }
 

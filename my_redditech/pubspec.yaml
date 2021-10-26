@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.0.1
   flappy_search_bar: ^1.7.2
   material_floating_search_bar: ^0.3.6
+  material_design_icons_flutter: ^5.0.6295
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_redditech/screens/sub_page_profil/sub_profil.dart';
+import 'package:my_redditech/states/global_state.dart';
+import 'package:provider/provider.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -37,18 +39,24 @@ class NavigationDrawer extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            buildMenuItem(
-                text: 'Paramètres',
-                icon: Icons.settings,
-                onClicked: () => selectedItem(context, 4)),
+            TextButton(
+              onPressed: () async {
+                await Provider.of<GlobalState>(context, listen: false).logout();
+                Navigator.pushReplacementNamed(context, '/');
+              },
+              child: buildMenuItem(text: 'Log out', icon: Icons.settings),
+            )
           ],
         ),
       ),
     );
   }
 
-  Widget buildMenuItem(
-      {required String text, required IconData icon, VoidCallback? onClicked}) {
+  Widget buildMenuItem({
+    required String text,
+    required IconData icon,
+    VoidCallback? onClicked,
+  }) {
     final color = Colors.grey.shade900;
     final hoverColor = Colors.green;
     return ListTile(
@@ -64,7 +72,7 @@ class NavigationDrawer extends StatelessWidget {
     switch (i) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const SubProfil(
+          builder: (context) => PageProfil(
             name: 'Profil',
             color: Colors.white,
           ),
@@ -90,14 +98,6 @@ class NavigationDrawer extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const SubProfil(
             name: 'Sauvergardé',
-            color: Colors.white,
-          ),
-        ));
-        break;
-      case 4:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const PageParameters(
-            name: 'Paramètres',
             color: Colors.white,
           ),
         ));

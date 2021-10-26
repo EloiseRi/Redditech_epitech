@@ -11,7 +11,7 @@ class SubredditsState with ChangeNotifier {
     List<SubredditRef> subs =
         await redditClient.reddit.subreddits.searchByName(query);
     List<String> subsNames = subs.map((sub) => sub.displayName).toList();
-
+    print(subsNames);
     return subsNames;
   }
 

@@ -4,8 +4,8 @@ import 'package:my_redditech/states/global_state.dart';
 import 'package:my_redditech/states/subreddits_state.dart';
 import 'package:my_redditech/utils/palette.dart';
 import 'package:provider/provider.dart';
+import 'package:my_redditech/screens/login_page.dart';
 import 'package:my_redditech/screens/home_page.dart';
-import 'package:my_redditech/screens/user_page.dart';
 
 Future<void> main() async {
   GlobalState globalState = GlobalState();

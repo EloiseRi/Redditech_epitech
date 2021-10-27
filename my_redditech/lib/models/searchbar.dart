@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:my_redditech/states/subreddits_state.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:intl/intl.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
@@ -62,10 +63,12 @@ class _SearchBar extends State<SearchBar> {
                       leading: CircleAvatar(
                           backgroundImage:
                               NetworkImage(suggestion.iconImage.toString())),
-                      title: Text(suggestion.displayName),
-                      subtitle: Text(
-                          suggestion.data!['subscribers'].toString() +
-                              ' subscribers'),
+                      title: Text('r/' + suggestion.displayName),
+                      subtitle: Text(NumberFormat.compactCurrency(
+                                  decimalDigits: 1, symbol: '')
+                              .format(suggestion.data!['subscribers'])
+                              .toString() +
+                          ' members'),
                     );
                   },
                   noItemsFoundBuilder: (value) {

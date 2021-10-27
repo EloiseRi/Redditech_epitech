@@ -24,7 +24,7 @@ class SubredditsState with ChangeNotifier {
         await redditClient.reddit.subreddits.searchByName(query);
 
     for (SubredditRef sub in subs) {
-      sub.populate().then((value) => subReddit.add(value));
+      await sub.populate().then((value) => subReddit.add(value));
     }
 
     return subReddit;

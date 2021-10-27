@@ -1,3 +1,4 @@
+import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:my_redditech/states/subreddits_state.dart';
@@ -59,7 +60,7 @@ class _SearchBar extends State<SearchBar> {
                   itemBuilder: (context, suggestion) {
                     if (suggestion != null) {
                       return ListTile(
-                        leading: const Icon(Icons.shopping_cart),
+                        // leading: const Icon(Icons.shopping_cart),
                         title: Text(suggestion.toString()),
                         // subtitle: Text('\$${suggestion['price']}'),
                       );

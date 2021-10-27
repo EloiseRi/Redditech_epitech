@@ -17,6 +17,19 @@ class SubredditsState with ChangeNotifier {
     return subsNames;
   }
 
+  // Useless for now, but can send subreddits list
+  Future<List<Subreddit>> searchSub(String query) async {
+    List<Subreddit> subReddit = [];
+    List<SubredditRef> subs =
+        await redditClient.reddit.subreddits.searchByName(query);
+
+    for (SubredditRef sub in subs) {
+      sub.populate().then((value) => subReddit.add(value));
+    }
+
+    return subReddit;
+  }
+
   Future<void> getUserSub() async {
     List<Multireddit>? multireddits =
         await redditClient.reddit.user.multireddits();

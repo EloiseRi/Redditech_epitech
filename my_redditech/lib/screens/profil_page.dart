@@ -1,22 +1,60 @@
+import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
 import 'package:my_redditech/screens/sub_page_profil/sub_profil.dart';
 import 'package:my_redditech/states/global_state.dart';
 import 'package:provider/provider.dart';
 
 class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
-
+  NavigationDrawer({Key? key}) : super(key: key);
+  late Redditor redditor;
   @override
   Widget build(BuildContext context) {
+    redditor = Provider.of<GlobalState>(context, listen: false).redditor;
     const urlImage =
-        'https://media-exp1.licdn.com/dms/image/C5603AQFrdq9exFkovQ/profile-displayphoto-shrink_800_800/0/1631048636825?e=1640822400&v=beta&t=6okkS6MWfH8prWG8C5wB5uboQ31FtP78K1T3O9Irngk';
+        'https://i.redd.it/snoovatar/avatars/e515cf47-9498-49c7-93d6-a6664f656f4f.png';
     return Drawer(
       child: Container(
         color: Colors.white12,
         child: ListView(
           children: <Widget>[
-            const CircleAvatar(
-                radius: 30, backgroundImage: NetworkImage(urlImage)),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            Image.network(
+              urlImage,
+              height: 200,
+            ),
+            Text(
+              "u/" + redditor.displayName.toString(),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: Colors.black, fontSize: 20, fontFamily: 'OpenSans'),
+            ),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            Row(children: [
+              const Padding(padding: EdgeInsets.only(left: 32)),
+              const Icon(Icons.filter_vintage_outlined),
+              Column(
+                children: [
+                  Text((redditor.data!['total_karma']).toString()),
+                  const Text(
+                    'Karma',
+                    style: TextStyle(fontSize: 13),
+                  ),
+                ],
+              ),
+              const Padding(padding: EdgeInsets.only(left: 70, top: 20)),
+              const Icon(Icons.cake_outlined),
+              const Padding(padding: EdgeInsets.only(left: 10, top: 20)),
+              Column(
+                children: [
+                  Text((redditor.createdUtc!.day.toString()) +
+                      "/" +
+                      (redditor.createdUtc!.month.toString()) +
+                      "/" +
+                      redditor.createdUtc!.year.toString()),
+                  const Text('Âge Reddit'),
+                ],
+              ),
+            ]),
             const Divider(
               color: Colors.black,
             ),
@@ -37,7 +75,7 @@ class NavigationDrawer extends StatelessWidget {
                 icon: Icons.bookmark_rounded,
                 onClicked: () => selectedItem(context, 3)),
             const SizedBox(
-              height: 50,
+              height: 40,
             ),
             TextButton(
               onPressed: () async {

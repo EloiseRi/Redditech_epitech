@@ -60,7 +60,7 @@ class _SearchBar extends State<SearchBar> {
                   itemBuilder: (context, suggestion) {
                     if (suggestion != null) {
                       return ListTile(
-                        // leading: const Icon(Icons.shopping_cart),
+                        // leading: const Icon(suggestion),
                         title: Text(suggestion.toString()),
                         // subtitle: Text('\$${suggestion['price']}'),
                       );

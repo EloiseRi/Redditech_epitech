@@ -43,6 +43,7 @@ dependencies:
   material_floating_search_bar: ^0.3.6
   material_design_icons_flutter: ^5.0.6295
   flutter_typeahead: ^3.2.1
+  time_elapsed: ^0.2.6
 
 dev_dependencies:
   flutter_test:
@@ -62,7 +63,17 @@ dev_dependencies:
 flutter:
   assets:
     - lib/assets/reddit_icon.png
-
+  fonts:
+    - family: Qahiri
+      fonts:
+        - asset: lib/assets/fonts/Qahiri-Regular.ttf
+          style: italic
+    - family: OpenSans
+      fonts:
+        - asset: lib/assets/fonts/OpenSans-Bold.ttf
+        # - asset: lib/assets/fonts/OpenSans-Regular.ttf
+        # - asset: lib/assets/fonts/OpenSans-SemiBold.ttf
+          style: italic
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -84,12 +95,6 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

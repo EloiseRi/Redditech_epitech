@@ -10,18 +10,22 @@ class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     redditor = Provider.of<GlobalState>(context, listen: false).redditor;
-    const urlImage =
-        'https://i.redd.it/snoovatar/avatars/e515cf47-9498-49c7-93d6-a6664f656f4f.png';
+    final urlImage = redditor.data!['snoovatar_img'].toString();
     return Drawer(
       child: Container(
         color: Colors.white12,
         child: ListView(
           children: <Widget>[
             const Padding(padding: EdgeInsets.only(top: 10)),
-            Image.network(
-              urlImage,
-              height: 200,
-            ),
+            urlImage != ''
+                ? Image.network(
+                    urlImage,
+                    height: 200,
+                  )
+                : Image.network(
+                    redditor.data!['icon_img'].toString(),
+                    height: 200,
+                  ),
             Text(
               "u/" + redditor.displayName.toString(),
               textAlign: TextAlign.center,

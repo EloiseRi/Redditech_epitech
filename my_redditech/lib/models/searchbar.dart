@@ -22,7 +22,7 @@ class _SearchBar extends State<SearchBar> {
             padding: const EdgeInsets.all(0),
             child: Column(
               children: <Widget>[
-                TypeAheadField(
+                TypeAheadField<Subreddit>(
                   textFieldConfiguration: TextFieldConfiguration(
                     cursorColor: Colors.grey,
                     autofocus: false,
@@ -55,20 +55,18 @@ class _SearchBar extends State<SearchBar> {
                   suggestionsCallback: (pattern) async {
                     return await Provider.of<SubredditsState>(context,
                             listen: false)
-                        .searchSubreddit(pattern);
+                        .searchSub(pattern);
                   },
                   itemBuilder: (context, suggestion) {
-                    if (suggestion != null) {
-                      return ListTile(
-                        // leading: const Icon(suggestion),
-                        title: Text(suggestion.toString()),
-                        // subtitle: Text('\$${suggestion['price']}'),
-                      );
-                    } else {
-                      return const ListTile(
-                        title: Text('No subreddit'),
-                      );
-                    }
+                    return ListTile(
+                      leading: CircleAvatar(
+                          backgroundImage:
+                              NetworkImage(suggestion.iconImage.toString())),
+                      title: Text(suggestion.displayName),
+                      subtitle: Text(
+                          suggestion.data!['subscribers'].toString() +
+                              ' subscribers'),
+                    );
                   },
                   noItemsFoundBuilder: (value) {
                     return const Text('  Oups! No result...');

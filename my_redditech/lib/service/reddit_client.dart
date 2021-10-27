@@ -8,10 +8,12 @@ class RedditClient {
   RedditClient({required this.reddit});
 
   late String _username;
+  late Redditor _redditor;
 
   String get authUrl =>
       reddit.auth.url(['*'], userAgent, compactLogin: true).toString();
   String get username => _username;
+  Redditor get redditor => _redditor;
 
   // Usage of factory makes it possible not to create a new instance for each call.
   // The call to this function is expensive, so it's preferable to recreate the
@@ -41,10 +43,6 @@ class RedditClient {
   Future<void> setUsername() async {
     Redditor redditor = await reddit.user.me() as Redditor;
     _username = redditor.displayName;
-  }
-
-  Future<Redditor> getUserInfo() async {
-    Redditor redditor = await reddit.user.me() as Redditor;
-    return redditor;
+    _redditor = redditor;
   }
 }

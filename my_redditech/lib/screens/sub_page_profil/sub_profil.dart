@@ -26,15 +26,17 @@ class PageProfil extends StatelessWidget {
   final Color color;
   late Redditor redditor;
 
+  String getUserPict(BuildContext context) {
+    String? urlPict = '';
+    urlPict = Provider.of<GlobalState>(context, listen: true)
+        .redditor
+        .data!['subreddit']['icon_img'];
+    return urlPict ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
-  Future<Redditor> Function() promise;
-  promise = () => Provider.of<GlobalState>(context, listen: false).getUserInfo();
-  var future = promise();
-  future.then((value) => redditor = value);
-
-    const urlImage =
-        'https://media-exp1.licdn.com/dms/image/C5603AQFrdq9exFkovQ/profile-displayphoto-shrink_800_800/0/1631048636825?e=1640822400&v=beta&t=6okkS6MWfH8prWG8C5wB5uboQ31FtP78K1T3O9Irngk';
+    redditor = Provider.of<GlobalState>(context, listen: false).redditor;
 
     return Scaffold(
         appBar: PreferredSize(
@@ -43,18 +45,19 @@ class PageProfil extends StatelessWidget {
           child: AppBar(
               flexibleSpace: FlexibleSpaceBarSettings(
                   toolbarOpacity: 1,
-                  minExtent: 20,
-                  maxExtent: 40,
+                  minExtent: 200,
+                  maxExtent: 400,
                   currentExtent: 200,
                   child: CircleAvatar(
-                      radius: 30, backgroundImage: NetworkImage(redditor.))),
+                      radius: 30,
+                      backgroundImage: NetworkImage(getUserPict(context)))),
               foregroundColor: Colors.black,
               centerTitle: true,
               backgroundColor: color),
         ),
         body: Container(
           padding: const EdgeInsets.only(top: 50, left: 15),
-          // child: Column(children: const <Widget>[
+          // child: Column(children: const <Widget>[Provider.of<GlobalState>(context, listen: false).redditor
           //   CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage))
           // ]),
         ));

@@ -9,9 +9,11 @@ class GlobalState with ChangeNotifier {
   String get authUrl => _redditClient.authUrl;
   String get username => _redditClient.username;
   SubredditsState get subredditsState => _subredditsState;
+  Redditor get redditor => _redditClient.redditor;
 
   late RedditClient _redditClient;
   late SubredditsState _subredditsState;
+  late Redditor _redditor;
 
   Future<void> initApp() async {
     print("Initilization of the Reddit client...");
@@ -23,10 +25,6 @@ class GlobalState with ChangeNotifier {
   Future<void> authorizeClient() async {
     await _redditClient.authorizeClient();
     await _redditClient.setUsername();
-  }
-
-  Future<Redditor> getUserInfo() async {
-    return await _redditClient.getUserInfo();
   }
 
   Future<void> logout() async {

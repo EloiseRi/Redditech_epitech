@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
         title: 'Redditech',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          fontFamily: 'OpenSans',
           primarySwatch: Palette.orangeReddit,
           scaffoldBackgroundColor: Colors.grey.shade200,
         ),

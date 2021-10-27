@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const NavigationDrawer(),
+      drawer: NavigationDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.white,
         bottom: PreferredSize(

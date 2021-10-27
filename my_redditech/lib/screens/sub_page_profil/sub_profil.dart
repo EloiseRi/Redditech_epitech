@@ -26,11 +26,17 @@ class PageProfil extends StatelessWidget {
   final Color color;
   late Redditor redditor;
 
+  // TODO - widget avec la fonction :
+  // penser à envoyer le context à la classe enfant
+  // Chercher un logo fixe "par défaut" à retourner si rien dans data
   String getUserPict(BuildContext context) {
     String? urlPict = '';
     urlPict = Provider.of<GlobalState>(context, listen: true)
-        .redditor
-        .data!['subreddit']['icon_img'];
+            .redditor
+            .data!['subreddit']['snoovatar_img'] ??
+        Provider.of<GlobalState>(context, listen: true)
+            .redditor
+            .data!['subreddit']['icon_img'];
     return urlPict ?? '';
   }
 

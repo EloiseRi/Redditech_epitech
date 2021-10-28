@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:my_redditech/screens/sub_page_profil/sub_profil.dart';
 import 'package:my_redditech/states/global_state.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
   late Redditor redditor;
@@ -19,7 +21,7 @@ class NavigationDrawer extends StatelessWidget {
             const Padding(padding: EdgeInsets.only(top: 10)),
             urlImage != ''
                 ? Image.network(
-                    urlImage,
+                    redditor.data!['snoovatar_img'].toString(),
                     height: 200,
                   )
                 : Image.network(
@@ -36,25 +38,30 @@ class NavigationDrawer extends StatelessWidget {
             Row(children: [
               const Padding(padding: EdgeInsets.only(left: 32)),
               const Icon(Icons.filter_vintage_outlined),
+              const Padding(padding: EdgeInsets.only(right: 8)),
               Column(
                 children: [
-                  Text((redditor.data!['total_karma']).toString()),
+                  (redditor.data!['total_karma'] > 999)
+                      ? Text(NumberFormat.compactCurrency(
+                              decimalDigits: 1, symbol: '')
+                          .format(redditor.data!['total_karma'])
+                          .toString())
+                      : Text((redditor.data!['total_karma']).toString()),
                   const Text(
                     'Karma',
                     style: TextStyle(fontSize: 13),
                   ),
                 ],
               ),
-              const Padding(padding: EdgeInsets.only(left: 70, top: 20)),
+              const Padding(padding: EdgeInsets.only(left: 60, top: 20)),
               const Icon(Icons.cake_outlined),
               const Padding(padding: EdgeInsets.only(left: 10, top: 20)),
               Column(
                 children: [
-                  Text((redditor.createdUtc!.day.toString()) +
-                      "/" +
-                      (redditor.createdUtc!.month.toString()) +
-                      "/" +
-                      redditor.createdUtc!.year.toString()),
+                  Text((DateTime.now().difference(redditor.createdUtc!))
+                          .inDays
+                          .toString() +
+                      " j"),
                   const Text('Âge Reddit'),
                 ],
               ),

@@ -96,6 +96,8 @@ class _PostsPageState extends State<PostsPage> {
               child: StreamBuilder(
                 stream: state.controller.stream,
                 builder: (context, snapshot) => PageView.builder(
+                    pageSnapping: false,
+                    controller: _controller,
                     scrollDirection: Axis.vertical,
                     itemCount: state.contentList.length,
                     itemBuilder: (context, index) {

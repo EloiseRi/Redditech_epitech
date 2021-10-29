@@ -1,22 +1,18 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
 import 'package:my_redditech/screens/controller_page.dart';
-import 'package:my_redditech/states/global_state.dart';
-import 'package:provider/provider.dart';
 
 class SubredditPage extends StatefulWidget {
   SubredditPage({Key? key, required this.subreddit}) : super(key: key);
   Subreddit subreddit;
 
   @override
-  State<SubredditPage> createState() => _PageProfilState();
+  State<SubredditPage> createState() => _SubredditPageState();
 }
 
-class _PageProfilState extends State<SubredditPage> {
-  late Redditor redditor;
+class _SubredditPageState extends State<SubredditPage> {
   @override
   Widget build(BuildContext context) {
-    redditor = Provider.of<GlobalState>(context, listen: false).redditor;
     String? image;
     if (Uri.parse(widget.subreddit.data!['community_icon']).isAbsolute) {
       image = Uri.parse(widget.subreddit.data!['community_icon'], 0,
@@ -25,10 +21,9 @@ class _PageProfilState extends State<SubredditPage> {
     } else {
       image = 'https://zupimages.net/up/21/43/6k02.png';
     }
-    final description =
-        (redditor.data!['subreddit']['public_description']) == null
-            ? ''
-            : redditor.data!['subreddit']['public_description'];
+
+    widget.subreddit.newest();
+
     final media = MediaQuery.of(context).size;
     return SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -80,7 +75,7 @@ class _PageProfilState extends State<SubredditPage> {
                             padding: EdgeInsets.only(top: 10),
                           ),
                           Text(
-                            widget.subreddit.data!['public_description'],
+                            widget.subreddit.data!['public_description'] ?? '',
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 12,

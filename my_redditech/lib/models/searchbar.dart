@@ -14,6 +14,18 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBar extends State<SearchBar> {
+  String? fetchLogo(Subreddit suggestion) {
+    String? logo;
+    if (Uri.parse(suggestion.data!['community_icon']).isAbsolute) {
+      logo = Uri.parse(suggestion.data!['community_icon'], 0,
+              suggestion.data!['community_icon'].toString().indexOf('?'))
+          .toString();
+    } else {
+      logo = 'https://zupimages.net/up/21/43/6k02.png';
+    }
+    return logo;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,13 +69,12 @@ class _SearchBar extends State<SearchBar> {
                   suggestionsCallback: (pattern) async {
                     return await Provider.of<SubredditsState>(context,
                             listen: false)
-                        .searchSub(pattern);
+                        .searchSubreddit(pattern);
                   },
                   itemBuilder: (context, suggestion) {
                     return ListTile(
                       leading: CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(suggestion.iconImage.toString())),
+                          child: Image.network(fetchLogo(suggestion)!)),
                       title: Text('r/' + suggestion.displayName),
                       subtitle: Text(NumberFormat.compactCurrency(
                                   decimalDigits: 1, symbol: '')

@@ -7,18 +7,7 @@ class SubredditsState with ChangeNotifier {
 
   SubredditsState({required this.redditClient});
 
-  Future<List<String>> searchSubreddit(String query) async {
-    List<SubredditRef> subs =
-        await redditClient.reddit.subreddits.searchByName(query);
-    List<String> subsNames = subs
-        .map((sub) => (sub.path).substring(0, (sub.path).length - 1))
-        .toList();
-
-    return subsNames;
-  }
-
-  // Useless for now, but can send subreddits list
-  Future<List<Subreddit>> searchSub(String query) async {
+  Future<List<Subreddit>> searchSubreddit(String query) async {
     List<Subreddit> subReddit = [];
     List<SubredditRef> subs =
         await redditClient.reddit.subreddits.searchByName(query);

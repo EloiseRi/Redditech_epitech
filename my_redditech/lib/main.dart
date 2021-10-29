@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_redditech/states/global_state.dart';
 import 'package:my_redditech/states/subreddits_state.dart';
+import 'package:my_redditech/states/posts_state.dart';
 import 'package:my_redditech/utils/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:my_redditech/screens/login_page.dart';
@@ -41,7 +42,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<SubredditsState>.value(
           value: globalState.subredditsState,
-        )
+        ),
+        ChangeNotifierProvider<PostsState>.value(
+          value: globalState.postsState,
+        ),
       ],
       child: MaterialApp(
         title: 'Redditech',

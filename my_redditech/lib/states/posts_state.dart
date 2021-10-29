@@ -21,7 +21,7 @@ class PostsState with ChangeNotifier {
 
   late StreamController<UserContent> controller;
   List<Submission> contentList = [];
-  String? currentSource;
+  String currentSource = "front page";
 
   List<Submission> get contents => List.from(contentList);
 
@@ -33,7 +33,7 @@ class PostsState with ChangeNotifier {
     source = source ?? currentSource;
     if (!loadMore) contentList.clear();
 
-    setSource(source!);
+    setSource(source);
     notifyListeners();
 
     String? next = loadMore ? contentList.last.fullname : null;
@@ -41,6 +41,12 @@ class PostsState with ChangeNotifier {
     switch (source) {
       case "front page":
         stream = redditClient.reddit.front.best(
+          limit: maxLoaded,
+          after: next,
+        );
+        break;
+      case "new":
+        stream = redditClient.reddit.front.newest(
           limit: maxLoaded,
           after: next,
         );

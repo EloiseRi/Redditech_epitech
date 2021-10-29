@@ -22,8 +22,6 @@ class _SubredditPageState extends State<SubredditPage> {
       image = 'https://zupimages.net/up/21/43/6k02.png';
     }
 
-    widget.subreddit.newest();
-
     final media = MediaQuery.of(context).size;
     return SizedBox(
         width: MediaQuery.of(context).size.width,

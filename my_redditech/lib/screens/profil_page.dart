@@ -12,6 +12,7 @@ class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     redditor = Provider.of<GlobalState>(context, listen: false).redditor;
+
     final urlImage = redditor.data!['snoovatar_img'].toString();
     return Drawer(
       child: Container(

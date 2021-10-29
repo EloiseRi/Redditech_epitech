@@ -3,6 +3,7 @@ import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
 import 'package:my_redditech/screens/profil_page.dart';
 import 'package:my_redditech/states/global_state.dart';
+import 'package:my_redditech/states/posts_state.dart';
 import 'package:my_redditech/utils/palette.dart';
 import 'package:my_redditech/models/searchbar.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     redditor = Provider.of<GlobalState>(context, listen: false).redditor;
-
     return Scaffold(
       drawer: NavigationDrawer(),
       appBar: AppBar(

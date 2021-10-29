@@ -121,7 +121,7 @@ class NavigationDrawer extends StatelessWidget {
     switch (i) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => PageProfil(
+          builder: (context) => const PageProfil(
             name: 'Profil',
             color: Colors.white,
           ),

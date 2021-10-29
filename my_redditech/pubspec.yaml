@@ -45,6 +45,7 @@ dependencies:
   flutter_typeahead: ^3.2.1
   intl: ^0.17.0
   time_elapsed: ^0.2.6
+  responsive_framework: ^0.1.4
 
 dev_dependencies:
   flutter_test:

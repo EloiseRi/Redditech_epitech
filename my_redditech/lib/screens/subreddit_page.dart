@@ -4,41 +4,27 @@ import 'package:my_redditech/screens/controller_page.dart';
 import 'package:my_redditech/states/global_state.dart';
 import 'package:provider/provider.dart';
 
-class SubProfil extends StatelessWidget {
-  const SubProfil({Key? key, required this.name, required this.color})
-      : super(key: key);
-
-  final String name;
-  final Color color;
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-            foregroundColor: Colors.black,
-            title: Text(name),
-            centerTitle: true,
-            backgroundColor: color),
-      );
-}
-
-class PageProfil extends StatefulWidget {
-  const PageProfil({Key? key, required this.name, required this.color})
-      : super(key: key);
-  final String name;
-  final Color color;
+class SubredditPage extends StatefulWidget {
+  SubredditPage({Key? key, required this.subreddit}) : super(key: key);
+  Subreddit subreddit;
 
   @override
-  State<PageProfil> createState() => _PageProfilState();
+  State<SubredditPage> createState() => _PageProfilState();
 }
 
-class _PageProfilState extends State<PageProfil> {
+class _PageProfilState extends State<SubredditPage> {
   late Redditor redditor;
-
   @override
   Widget build(BuildContext context) {
     redditor = Provider.of<GlobalState>(context, listen: false).redditor;
-    final subcribers = redditor.data!['subreddit']['subscribers'] != null
-        ? redditor.data!['subreddit']['subscribers'].toString()
-        : '0';
+    String? image;
+    if (Uri.parse(widget.subreddit.data!['community_icon']).isAbsolute) {
+      image = Uri.parse(widget.subreddit.data!['community_icon'], 0,
+              widget.subreddit.data!['community_icon'].toString().indexOf('?'))
+          .toString();
+    } else {
+      image = 'https://zupimages.net/up/21/43/6k02.png';
+    }
     final description =
         (redditor.data!['subreddit']['public_description']) == null
             ? ''
@@ -55,7 +41,7 @@ class _PageProfilState extends State<PageProfil> {
             tabController.addListener(() {});
             return Scaffold(
               appBar: PreferredSize(
-                  preferredSize: const Size.fromHeight(295.0),
+                  preferredSize: const Size.fromHeight(400.0),
                   child: AppBar(
                     toolbarHeight: 400,
                     flexibleSpace: Padding(
@@ -65,13 +51,13 @@ class _PageProfilState extends State<PageProfil> {
                           CircleAvatar(
                             radius: 55,
                             child: Image.network(
-                              redditor.data!['snoovatar_img'].toString(),
+                              image!,
                             ),
                             backgroundColor: Colors.grey.shade200,
                           ),
                           const Padding(padding: EdgeInsets.only(top: 20)),
                           Text(
-                            'u/' + redditor.displayName.toString(),
+                            'r/' + widget.subreddit.displayName,
                             style: const TextStyle(
                               fontSize: 20,
                             ),
@@ -79,25 +65,14 @@ class _PageProfilState extends State<PageProfil> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      left: media.aspectRatio * 150, top: 10)),
+                              // Padding(
+                              //     padding: EdgeInsets.only(
+                              //         left: media.aspectRatio * 150, top: 10)),
                               Text(
-                                  redditor.data!['total_karma'].toString() +
-                                      ' karma · ' +
-                                      (DateTime.now()
-                                              .difference(redditor.createdUtc!))
-                                          .inDays
+                                  widget.subreddit.data!['subscribers']
                                           .toString() +
-                                      " j · " +
-                                      (DateTime.now().day.toString()) +
-                                      " " +
-                                      (DateTime.now().month.toString()) +
-                                      " " +
-                                      (DateTime.now().year.toString()) +
-                                      " · " +
-                                      subcribers +
-                                      " abonné(e)",
+                                      ' members',
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(fontSize: 12)),
                             ],
                           ),
@@ -105,7 +80,7 @@ class _PageProfilState extends State<PageProfil> {
                             padding: EdgeInsets.only(top: 10),
                           ),
                           Text(
-                            description.toString(),
+                            widget.subreddit.data!['public_description'],
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 12,
@@ -116,7 +91,7 @@ class _PageProfilState extends State<PageProfil> {
                     ),
                     foregroundColor: Colors.black,
                     centerTitle: true,
-                    backgroundColor: widget.color,
+                    backgroundColor: Colors.white,
                     bottom: const TabBar(
                       tabs: tabs,
                       labelColor: Colors.black,
@@ -142,36 +117,6 @@ class _PageProfilState extends State<PageProfil> {
                     child: Column(
                       children: [
                         const Padding(padding: EdgeInsets.only(top: 30)),
-                        Row(children: [
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: media.aspectRatio * 60)),
-                          Text(
-                              'Karma de publications: ' +
-                                  redditor.data!['link_karma'].toString(),
-                              style: const TextStyle(fontSize: 12)),
-                          const Padding(padding: EdgeInsets.only(left: 15)),
-                          Text(
-                            'Karma de commentaires: ' +
-                                redditor.data!['comment_karma'].toString(),
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                        ]),
-                        const Padding(padding: EdgeInsets.all(10)),
-                        Row(children: [
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: media.aspectRatio * 60)),
-                          Text(
-                              'Karma de philanthrope: ' +
-                                  redditor.data!['awarder_karma'].toString(),
-                              style: const TextStyle(fontSize: 12)),
-                          const Padding(padding: EdgeInsets.only(left: 15)),
-                          Text(
-                              'Karma de récipiendaire: ' +
-                                  redditor.data!['awardee_karma'].toString(),
-                              style: const TextStyle(fontSize: 12)),
-                        ]),
                         const Padding(padding: EdgeInsets.all(10)),
                         const Divider(
                           color: Colors.black,

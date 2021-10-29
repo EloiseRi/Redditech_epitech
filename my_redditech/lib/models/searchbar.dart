@@ -1,5 +1,6 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
+import 'package:my_redditech/screens/subreddit_page.dart';
 import 'package:provider/provider.dart';
 import 'package:my_redditech/states/subreddits_state.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -75,9 +76,11 @@ class _SearchBar extends State<SearchBar> {
                     return const Text('  Oups! No result...');
                   },
                   onSuggestionSelected: (suggestion) {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //   builder: (context) => ProductPage(product: suggestion)
-                    // ));
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SubredditPage(
+                        subreddit: suggestion,
+                      ),
+                    ));
                   },
                 )
               ],

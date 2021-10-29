@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
 import 'package:my_redditech/screens/profil_page.dart';
+import 'package:my_redditech/screens/controller_page.dart';
 import 'package:my_redditech/states/global_state.dart';
 import 'package:my_redditech/states/posts_state.dart';
 import 'package:my_redditech/utils/palette.dart';
@@ -57,9 +58,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
+        child: const PostsPage(startingIndex: 0,),
+
+        // child: Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        // ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.grey,

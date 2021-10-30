@@ -2,9 +2,11 @@ import 'package:draw/draw.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:my_redditech/screens/controller_page.dart';
 import 'package:my_redditech/states/posts_state.dart';
+import 'package:my_redditech/widgets/gfycattype.dart';
 import 'package:my_redditech/widgets/imagetype.dart';
 import 'package:my_redditech/widgets/selftype.dart';
 import 'package:my_redditech/widgets/videotype.dart';
+import 'package:my_redditech/widgets/yttype.dart';
 import 'package:provider/provider.dart';
 
 class DisplayPost extends StatefulWidget {
@@ -31,9 +33,10 @@ class _DisplayPost extends State<DisplayPost> {
     super.initState();
     _post = widget.post;
     _type = getType();
-    if (_loadMore)
+    if (_loadMore) {
       Provider.of<PostsState>(context, listen: false)
           .fetchPosts(loadMore: true);
+    }
   }
 
   String getType() {
@@ -41,6 +44,9 @@ class _DisplayPost extends State<DisplayPost> {
     if (_post!.isVideo) return 'videoType';
     if (RegExp(r"\.(jpe?g|png|bmp|gif)$").hasMatch(_post!.url.toString()))
       return 'imageType';
+    if (RegExp(
+            r"(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v\=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})")
+        .hasMatch(_post!.url.toString())) return 'ytType';
     if (_post!.url.toString().contains('.gifv')) return 'videoGType';
     if (_post!.domain == "gfycat.com") return 'gfycatType';
     if (_post!.domain == "imgur.com") return 'imgurType';
@@ -49,7 +55,7 @@ class _DisplayPost extends State<DisplayPost> {
 
   @override
   Widget build(BuildContext context) {
-    Widget? widget;
+    Widget widget = Image.network(_post!.thumbnail.toString());
     switch (_type) {
       case 'selfType':
         widget = SelfType(content: _post!.selftext!);
@@ -66,6 +72,7 @@ class _DisplayPost extends State<DisplayPost> {
         );
         break;
       case 'gfycatType':
+        widget = GfycatVideoType(url: _post!.url);
         break;
       case 'imgurType':
         String id = _post!.url.path.substring(1);
@@ -73,14 +80,17 @@ class _DisplayPost extends State<DisplayPost> {
           url: "https://i.imgur.com/$id.jpg",
         );
         break;
+      case 'ytbType':
+        widget = YtVideoType(url: _post!.url.toString());
+        break;
       case 'linkType':
         break;
       default:
-        throw "Unknown type";
+        widget = Image.network(_post!.thumbnail.toString());
     }
     return Column(
       children: [
-        widget!,
+        widget,
       ],
     );
   }

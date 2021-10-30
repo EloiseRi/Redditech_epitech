@@ -53,6 +53,8 @@ dependencies:
   metadata_fetch: ^0.4.1
   url_launcher: ^6.0.12
   video_provider: ^1.1.1
+  dio: ^4.0.1
+  youtube_player_flutter: ^8.0.0
 
 dev_dependencies:
   flutter_test:

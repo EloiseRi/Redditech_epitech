@@ -75,9 +75,15 @@ class _HomePageState extends State<HomePage> {
               body: TabBarView(
                 children: [
                   Column(
-                    children: const [
-                      Padding(padding: EdgeInsets.only(top: 50)),
-                      Text('Ohh No, It\'s empty'),
+                    children: const <Widget>[
+                      Expanded(
+                        // flex: 1,
+                        child: PostsPage(
+                            // child: Column(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            startingIndex: 0,
+                            source: 'hot'),
+                      ),
                     ],
                   ),
                   Column(
@@ -85,17 +91,23 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         // flex: 1,
                         child: PostsPage(
-                          // child: Column(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          startingIndex: 0,
-                        ),
+                            // child: Column(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            startingIndex: 0,
+                            source: "front page"),
                       ),
                     ],
                   ),
                   Column(
-                    children: const [
-                      Padding(padding: EdgeInsets.only(top: 50)),
-                      Text('Ohh No, It\'s empty'),
+                    children: const <Widget>[
+                      Expanded(
+                        // flex: 1,
+                        child: PostsPage(
+                            // child: Column(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            startingIndex: 0,
+                            source: "new"),
+                      ),
                     ],
                   ),
                 ],

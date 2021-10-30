@@ -6,8 +6,10 @@ import 'package:my_redditech/states/posts_state.dart';
 import 'package:provider/provider.dart';
 
 class PostsPage extends StatefulWidget {
-  const PostsPage({Key? key, required this.startingIndex}) : super(key: key);
+  const PostsPage({Key? key, required this.startingIndex, required this.source})
+      : super(key: key);
   final int startingIndex;
+  final String source;
   @override
   _PostsPageState createState() => _PostsPageState();
 }
@@ -17,11 +19,17 @@ class _PostsPageState extends State<PostsPage> {
   bool shouldPop = true;
   @override
   void initState() {
-    _controller = PageController();
     super.initState();
+    _controller = PageController();
   }
 
+  void fetchRightFlux() async {
+    Provider.of<PostsState>(context).fetchPosts(source: widget.source);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    fetchRightFlux();
     return Scaffold(
       body: SafeArea(
         child: Consumer<PostsState>(

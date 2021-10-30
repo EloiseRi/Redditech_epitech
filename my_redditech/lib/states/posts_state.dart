@@ -69,12 +69,6 @@ class PostsState with ChangeNotifier {
     controller.addStream(stream);
   }
 
-  Stream<UserContent> fetchUserSubmissions() {
-    Redditor user = redditClient.reddit.user.me() as Redditor;
-    Stream<UserContent> subContent = user.newest();
-    return subContent;
-  }
-
   void setSource(String source) {
     currentSource = source;
     notifyListeners();

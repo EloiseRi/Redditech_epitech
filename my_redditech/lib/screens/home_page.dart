@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_redditech/screens/profil_page.dart';
 import 'package:my_redditech/screens/controller_page.dart';
 import 'package:my_redditech/states/global_state.dart';
+import 'package:my_redditech/states/posts_state.dart';
 import 'package:my_redditech/utils/name_tabs.dart';
 import 'package:my_redditech/utils/palette.dart';
 import 'package:my_redditech/models/searchbar.dart';
@@ -17,14 +18,51 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   late Redditor redditor;
+  late TabController tabController;
 
   void _onTapItem(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void handleTabLoading() {
+    if (tabController.indexIsChanging) {
+      print(tabController.index);
+      switch (tabController.index) {
+        case 0:
+          Provider.of<PostsState>(context, listen: false)
+              .fetchPosts(source: 'new');
+          break;
+        case 1:
+          Provider.of<PostsState>(context, listen: false)
+              .fetchPosts(source: 'front page');
+          break;
+        case 2:
+          Provider.of<PostsState>(context, listen: false)
+              .fetchPosts(source: 'hot');
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(vsync: this, length: tabsHomePage.length);
+    tabController.addListener(handleTabLoading);
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -36,9 +74,8 @@ class _HomePageState extends State<HomePage> {
         child: DefaultTabController(
           length: tabsHomePage.length,
           child: Builder(builder: (BuildContext context) {
-            final TabController tabController =
-                DefaultTabController.of(context)!;
-            tabController.addListener(() {});
+            // tabController = DefaultTabController.of(context)!;
+            // tabController.addListener(() {});
             return Scaffold(
               drawer: NavigationDrawer(),
               appBar: PreferredSize(
@@ -46,7 +83,8 @@ class _HomePageState extends State<HomePage> {
                 child: AppBar(
                   toolbarHeight: 110,
                   backgroundColor: Colors.white,
-                  bottom: const TabBar(
+                  bottom: TabBar(
+                    controller: tabController,
                     tabs: tabsHomePage,
                     labelColor: Colors.black,
                   ),
@@ -73,9 +111,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               body: TabBarView(
+                controller: tabController,
                 children: [
                   Column(
-                    children: const <Widget>[
+                    children: <Widget>[
                       Expanded(
                         child: PostsPage(
                             // child: Column(

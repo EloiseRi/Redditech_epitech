@@ -13,9 +13,9 @@ class SelfType extends StatelessWidget {
     return content.isNotEmpty
         ? Container(
             padding: const EdgeInsets.all(4),
-            margin: const EdgeInsets.all(4),
-            decoration:
-                const BoxDecoration(color: Color.fromARGB(20, 20, 20, 20)),
+            margin: const EdgeInsets.all(10),
+            // decoration:
+            //     const BoxDecoration(color: Color.fromARGB(15, 20, 20, 20)),
             child: MarkdownBody(
               data: HtmlUnescape().convert(content),
             ),

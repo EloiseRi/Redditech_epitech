@@ -7,29 +7,30 @@ class TitlePost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //   String? test =
+    //       post.data!['children']['data']['all_awardings']['icon_url'].toString();
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.rectangle,
         // color: Colors.grey.shade200,
       ),
-      // child: Card(
-      //   margin: const EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 0),
-      // color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 20, left: 15),
+        padding: const EdgeInsets.only(bottom: 20),
         child: Column(
           children: [
-            const Padding(padding: EdgeInsets.only(bottom: 20)),
             Row(
               children: [
+                const Padding(padding: EdgeInsets.only(top: 20, bottom: 20)),
+                // Image.network(test ?? 'https://zupimages.net/up/21/43/ijqr.png'),
                 Text(
                   post.data!['subreddit_name_prefixed'],
-                  style: const TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ],
             ),
             Row(
               children: [
+                // const Padding(padding: EdgeInsets.only(left: 30)),
                 Text("u/" +
                     post.data!['author'] +
                     " · " +

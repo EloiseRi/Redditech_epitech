@@ -27,6 +27,7 @@ class _PostsPageState extends State<PostsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       body: SafeArea(
         child: Consumer<PostsState>(
           builder: (context, state, _) {
@@ -37,7 +38,6 @@ class _PostsPageState extends State<PostsPage> {
               child: StreamBuilder(
                 stream: state.controller.stream,
                 builder: (context, snapshot) => ListView.builder(
-                    // pageSnapping: false,
                     controller: _controller,
                     scrollDirection: Axis.vertical,
                     itemCount: state.contentList.length,
@@ -47,27 +47,24 @@ class _PostsPageState extends State<PostsPage> {
                       return SingleChildScrollView(
                         child: Column(children: [
                           Card(
-                              color: Colors.amber,
+                              margin: const EdgeInsets.only(
+                                  top: 10, left: 5, right: 5, bottom: 0),
+                              color: Colors.white,
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
+                                      const Padding(
+                                          padding: EdgeInsets.only(left: 25)),
                                       TitlePost(
                                         post: post,
                                       ),
                                     ],
                                   ),
-                                  // SizedBox(
-                                  //   width: MediaQuery.of(context).size.width,
-                                  //
-                                  // Row(
-                                  //   children: [
                                   DisplayPost(
                                     post: post,
                                     loadMore: loadMore,
                                   ),
-                                  //   ],r
-                                  // ),
                                 ],
                               ))
                         ]),

@@ -67,6 +67,10 @@ class _DisplayPost extends State<DisplayPost> {
       case 'gfycatType':
         break;
       case 'imgurType':
+        String id = _post!.url.path.substring(1);
+        widget = ImageType(
+          url: "https://i.imgur.com/$id.jpg",
+        );
         break;
       case 'linkType':
         break;

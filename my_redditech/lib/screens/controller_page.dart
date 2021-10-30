@@ -23,13 +23,12 @@ class _PostsPageState extends State<PostsPage> {
     _controller = PageController();
   }
 
-  void fetchRightFlux() async {
-    Provider.of<PostsState>(context).fetchPosts(source: widget.source);
+  Future<void> fetchRightFlux() async {
+    await Provider.of<PostsState>(context).fetchPosts(source: widget.source);
   }
 
   @override
   Widget build(BuildContext context) {
-    fetchRightFlux();
     return Scaffold(
       body: SafeArea(
         child: Consumer<PostsState>(

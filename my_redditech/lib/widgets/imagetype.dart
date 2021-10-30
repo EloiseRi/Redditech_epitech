@@ -8,7 +8,7 @@ class ImageType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.network(
-      url!,
+      url ?? 'https://zupimages.net/up/21/43/6k02.png',
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;
         return Padding(

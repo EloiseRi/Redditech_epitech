@@ -11,3 +11,8 @@ const List<Tab> tabsHomePage = <Tab>[
   Tab(text: 'Home'),
   Tab(text: 'Popular'),
 ];
+
+const List<Tab> tabsSubreddit = <Tab>[
+  Tab(text: 'Publications'),
+  Tab(text: 'About'),
+];

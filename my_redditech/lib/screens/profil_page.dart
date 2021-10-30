@@ -2,6 +2,7 @@ import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
 import 'package:my_redditech/screens/sub_page_profil/sub_profil.dart';
 import 'package:my_redditech/states/global_state.dart';
+import 'package:my_redditech/states/posts_state.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -9,6 +10,7 @@ import 'package:intl/intl.dart';
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
   late Redditor redditor;
+
   @override
   Widget build(BuildContext context) {
     redditor = Provider.of<GlobalState>(context, listen: false).redditor;

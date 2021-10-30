@@ -1,6 +1,8 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
+import 'package:my_redditech/screens/controller_page.dart';
 import 'package:my_redditech/states/global_state.dart';
+import 'package:my_redditech/states/posts_state.dart';
 import 'package:my_redditech/utils/name_tabs.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +34,7 @@ class PageProfil extends StatefulWidget {
 
 class _PageProfilState extends State<PageProfil> {
   late Redditor redditor;
+  late Stream<UserContent> subContent;
 
   @override
   Widget build(BuildContext context) {

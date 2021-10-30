@@ -54,7 +54,7 @@ class _SubredditPageState extends State<SubredditPage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: DefaultTabController(
-          length: tabsSubProfil.length,
+          length: tabsSubreddit.length,
           child: Builder(builder: (BuildContext context) {
             final TabController tabController =
                 DefaultTabController.of(context)!;
@@ -96,7 +96,13 @@ class _SubredditPageState extends State<SubredditPage> {
                           const Padding(
                             padding: EdgeInsets.only(top: 10),
                           ),
-                          Expanded(
+                          Container(
+                            constraints: const BoxConstraints(
+                              minHeight: 50,
+                              minWidth: 50,
+                              maxHeight: 50,
+                              maxWidth: 400,
+                            ),
                             child: Text(
                               widget.subreddit.data!['public_description'] ??
                                   '',
@@ -113,7 +119,7 @@ class _SubredditPageState extends State<SubredditPage> {
                     centerTitle: true,
                     backgroundColor: Colors.white,
                     bottom: const TabBar(
-                      tabs: tabsSubProfil,
+                      tabs: tabsSubreddit,
                       labelColor: Colors.black,
                     ),
                   )),
@@ -127,26 +133,29 @@ class _SubredditPageState extends State<SubredditPage> {
                               source: widget.subreddit.displayName))
                     ],
                   ),
-                  Column(
-                    children: const [
-                      Padding(padding: EdgeInsets.only(top: 50)),
-                      Text('Ohh No, It\'s empty'),
-                    ],
-                  ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     child: Column(
-                      children: const [
+                      children: [
                         Padding(padding: EdgeInsets.only(top: 30)),
                         Padding(padding: EdgeInsets.all(10)),
+                        Expanded(
+                          child: Text(
+                            widget.subreddit.data!['public_description'] ?? '',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
                         // Divider(
                         //   color: Colors.black,
                         //   thickness: 1,
                         // )
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             );

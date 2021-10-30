@@ -1,5 +1,6 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
+import 'package:my_redditech/models/display_post.dart';
 import 'package:my_redditech/models/title_post.dart';
 import 'package:my_redditech/states/posts_state.dart';
 import 'package:provider/provider.dart';
@@ -40,11 +41,15 @@ class _PostsPageState extends State<PostsPage> {
                       Submission post = state.contentList[index];
                       bool loadMore = (index > state.contentList.length - 10);
                       return SingleChildScrollView(
-                        child: Center(
-                          child: TitlePost(
+                        child: Column(children: [
+                          TitlePost(
                             post: post,
                           ),
-                        ),
+                          DisplayPost(
+                            post: post,
+                            loadMore: loadMore,
+                          ),
+                        ]),
                       );
                     }),
               ),

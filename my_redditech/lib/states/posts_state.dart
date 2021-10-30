@@ -51,6 +51,12 @@ class PostsState with ChangeNotifier {
           after: next,
         );
         break;
+      case "hot":
+        stream = redditClient.reddit.front.hot(
+          limit: maxLoaded,
+          after: next,
+        );
+        break;
       default:
         stream = redditClient.reddit.subreddit(source).hot(
               limit: maxLoaded,

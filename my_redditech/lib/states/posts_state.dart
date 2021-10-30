@@ -22,14 +22,14 @@ class PostsState with ChangeNotifier {
   late StreamController<UserContent> controller;
   List<Submission> contentList = [];
   bool _isLoading = false;
-  String currentSource = "front page";
+  String currentSource = "new";
 
   List<Submission> get contents => List.from(contentList);
   bool get isLoading => _isLoading;
 
   void fetchPosts({
     String? source,
-    int maxLoaded = 30,
+    int maxLoaded = 50,
     bool loadMore = false,
   }) {
     setBusy();

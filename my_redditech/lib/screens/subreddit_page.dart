@@ -1,6 +1,11 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
+import 'package:my_redditech/models/display_post.dart';
+import 'package:my_redditech/models/title_post.dart';
+import 'package:my_redditech/screens/controller_page.dart';
+import 'package:my_redditech/states/posts_state.dart';
 import 'package:my_redditech/utils/name_tabs.dart';
+import 'package:provider/provider.dart';
 
 class SubredditPage extends StatefulWidget {
   SubredditPage({Key? key, required this.subreddit}) : super(key: key);
@@ -11,6 +16,14 @@ class SubredditPage extends StatefulWidget {
 }
 
 class _SubredditPageState extends State<SubredditPage> {
+  late PageController _controller;
+  bool shouldPop = true;
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController();
+  }
+
   @override
   Widget build(BuildContext context) {
     String? image;
@@ -83,11 +96,14 @@ class _SubredditPageState extends State<SubredditPage> {
                           const Padding(
                             padding: EdgeInsets.only(top: 10),
                           ),
-                          Text(
-                            widget.subreddit.data!['public_description'] ?? '',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 12,
+                          Expanded(
+                            child: Text(
+                              widget.subreddit.data!['public_description'] ??
+                                  '',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ],
@@ -104,9 +120,11 @@ class _SubredditPageState extends State<SubredditPage> {
               body: TabBarView(
                 children: [
                   Column(
-                    children: const [
-                      Padding(padding: EdgeInsets.only(top: 50)),
-                      Text('Ohh No, It\'s empty'),
+                    children: <Widget>[
+                      Expanded(
+                          child: PostsPage(
+                              startingIndex: 0,
+                              source: widget.subreddit.displayName))
                     ],
                   ),
                   Column(

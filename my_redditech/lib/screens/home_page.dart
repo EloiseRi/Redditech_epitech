@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                             // child: Column(
                             //   mainAxisAlignment: MainAxisAlignment.center,
                             startingIndex: 0,
-                            source: 'hot'),
+                            source: 'front page'),
                       ),
                     ],
                   ),
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                             // child: Column(
                             //   mainAxisAlignment: MainAxisAlignment.center,
                             startingIndex: 0,
-                            source: "front page"),
+                            source: 'firstLoad'),
                       ),
                     ],
                   ),
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                             // child: Column(
                             //   mainAxisAlignment: MainAxisAlignment.center,
                             startingIndex: 0,
-                            source: "new"),
+                            source: 'firstLoad'),
                       ),
                     ],
                   ),

@@ -29,7 +29,7 @@ class GlobalState with ChangeNotifier {
   Future<void> authorizeClient() async {
     await _redditClient.authorizeClient();
     await _redditClient.setUsername();
-    _postsState.fetchPosts(source: "new");
+    _postsState.fetchPosts(source: "front page");
   }
 
   Future<void> logout() async {

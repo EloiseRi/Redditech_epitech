@@ -33,6 +33,8 @@ class _PostsPageState extends State<PostsPage> {
           builder: (context, state, _) {
             return WillPopScope(
               onWillPop: () async {
+                Provider.of<PostsState>(context, listen: false)
+                    .fetchPosts(source: 'front page');
                 return shouldPop;
               },
               child: StreamBuilder(

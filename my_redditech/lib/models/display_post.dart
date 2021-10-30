@@ -1,5 +1,6 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:my_redditech/screens/controller_page.dart';
 import 'package:my_redditech/states/posts_state.dart';
 import 'package:my_redditech/widgets/gfycattype.dart';
@@ -53,6 +54,26 @@ class _DisplayPost extends State<DisplayPost> {
     return 'linkType';
   }
 
+  void refreshPost() async {
+    dynamic post = await _post!.refresh();
+    setState(() {
+      _post = post.first;
+    });
+  }
+
+  void vote(VoteState vote) async {
+    if (vote != _post!.vote) {
+      if (vote == VoteState.upvoted) {
+        await _post!.upvote();
+      } else if (vote == VoteState.downvoted) {
+        await _post!.downvote();
+      }
+    } else {
+      await _post!.clearVote();
+    }
+    refreshPost();
+  }
+
   @override
   Widget build(BuildContext context) {
     String? url = _post?.thumbnail.toString();
@@ -92,13 +113,40 @@ class _DisplayPost extends State<DisplayPost> {
         widget = Image.network(_post!.thumbnail.toString());
     }
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 2),
-          child: Text(_post!.title),
-        ),
+        Text(_post!.title),
         widget,
+        Container(
+            child: Row(
+          children: <Widget>[
+            GestureDetector(
+              onTap: () => vote(VoteState.upvoted),
+              child: Icon(
+                Icons.arrow_upward,
+                color: _post!.vote == VoteState.upvoted
+                    ? Colors.orange
+                    : Colors.grey.shade700,
+              ),
+            ),
+            Text(_post!.score.toString()),
+            GestureDetector(
+                onTap: () => vote(VoteState.downvoted),
+                child: Icon(
+                  Icons.arrow_downward,
+                  color: _post!.vote == VoteState.downvoted
+                      ? Colors.orange
+                      : Colors.grey.shade700,
+                )),
+            const SizedBox(
+              width: 15,
+            ),
+            const Icon(
+              Icons.comment,
+              color: Colors.grey,
+            ),
+            Text(_post!.numComments.toString()),
+          ],
+        ))
       ],
     );
   }

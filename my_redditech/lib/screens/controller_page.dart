@@ -60,18 +60,17 @@ class _PostsPageState extends State<PostsPage> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height,
-                                    child: Row(
-                                      children: [
-                                        DisplayPost(
-                                          post: post,
-                                          loadMore: loadMore,
-                                        ),
-                                      ],
-                                    ),
+                                  // SizedBox(
+                                  //   width: MediaQuery.of(context).size.width,
+                                  //
+                                  // Row(
+                                  //   children: [
+                                  DisplayPost(
+                                    post: post,
+                                    loadMore: loadMore,
                                   ),
+                                  //   ],r
+                                  // ),
                                 ],
                               ))
                         ]),

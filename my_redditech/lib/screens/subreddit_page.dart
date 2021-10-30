@@ -21,7 +21,22 @@ class _SubredditPageState extends State<SubredditPage> {
     } else {
       image = 'https://zupimages.net/up/21/43/6k02.png';
     }
-
+    String? banner;
+    if (Uri.parse(widget.subreddit.data!['banner_background_image'])
+        .isAbsolute) {
+      banner = Uri.parse(
+              widget.subreddit.data!['banner_background_image'],
+              0,
+              widget.subreddit.data!['banner_background_image']
+                  .toString()
+                  .indexOf('?'))
+          .toString();
+    } else {
+      banner =
+          'https://styles.redditmedia.com/t5_2qh1o/styles/bannerBackgroundImage_wmbf6g1dei301.png';
+    }
+    String? url =
+        'https://styles.redditmedia.com/t5_2qh1o/styles/bannerBackgroundImage_wmbf6g1dei301.png';
     return SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -33,9 +48,9 @@ class _SubredditPageState extends State<SubredditPage> {
             tabController.addListener(() {});
             return Scaffold(
               appBar: PreferredSize(
-                  preferredSize: const Size.fromHeight(400.0),
+                  preferredSize: const Size.fromHeight(300.0),
                   child: AppBar(
-                    toolbarHeight: 400,
+                    toolbarHeight: 100,
                     flexibleSpace: Padding(
                       padding: const EdgeInsets.only(top: 40, left: 0),
                       child: Column(
@@ -57,9 +72,6 @@ class _SubredditPageState extends State<SubredditPage> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              // Padding(
-                              //     padding: EdgeInsets.only(
-                              //         left: media.aspectRatio * 150, top: 10)),
                               Text(
                                   widget.subreddit.data!['subscribers']
                                           .toString() +
@@ -110,10 +122,10 @@ class _SubredditPageState extends State<SubredditPage> {
                       children: const [
                         Padding(padding: EdgeInsets.only(top: 30)),
                         Padding(padding: EdgeInsets.all(10)),
-                        Divider(
-                          color: Colors.black,
-                          thickness: 1,
-                        )
+                        // Divider(
+                        //   color: Colors.black,
+                        //   thickness: 1,
+                        // )
                       ],
                     ),
                   )

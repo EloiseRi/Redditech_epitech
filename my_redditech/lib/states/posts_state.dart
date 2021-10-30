@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:draw/draw.dart';
 import 'package:my_redditech/service/reddit_client.dart';

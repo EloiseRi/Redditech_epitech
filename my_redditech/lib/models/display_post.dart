@@ -55,7 +55,10 @@ class _DisplayPost extends State<DisplayPost> {
 
   @override
   Widget build(BuildContext context) {
-    Widget widget = Image.network(_post!.thumbnail.toString());
+    String? url = _post?.thumbnail.toString();
+    Widget widget = Image.network(url != 'self' && url != 'default' && url != ''
+        ? url!
+        : 'https://zupimages.net/up/21/43/6k02.png');
     switch (_type) {
       case 'selfType':
         widget = SelfType(content: _post!.selftext!);

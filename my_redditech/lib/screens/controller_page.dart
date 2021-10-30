@@ -29,7 +29,7 @@ class _PostsPageState extends State<PostsPage> {
 
   @override
   Widget build(BuildContext context) {
-    fetchRightFlux();
+    // fetchRightFlux();
     return Scaffold(
       body: SafeArea(
         child: Consumer<PostsState>(
@@ -50,13 +50,31 @@ class _PostsPageState extends State<PostsPage> {
                       bool loadMore = (index > state.contentList.length - 10);
                       return SingleChildScrollView(
                         child: Column(children: [
-                          TitlePost(
-                            post: post,
-                          ),
-                          DisplayPost(
-                            post: post,
-                            loadMore: loadMore,
-                          ),
+                          Card(
+                              color: Colors.amber,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      TitlePost(
+                                        post: post,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height,
+                                    child: Row(
+                                      children: [
+                                        DisplayPost(
+                                          post: post,
+                                          loadMore: loadMore,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ))
                         ]),
                       );
                     }),

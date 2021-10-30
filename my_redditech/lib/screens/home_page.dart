@@ -31,8 +31,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     redditor = Provider.of<GlobalState>(context, listen: false).redditor;
     return SizedBox(
-        width: 5,
-        height: 5,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: DefaultTabController(
           length: tabsHomePage.length,
           child: Builder(builder: (BuildContext context) {
@@ -77,7 +77,6 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     children: const <Widget>[
                       Expanded(
-                        // flex: 1,
                         child: PostsPage(
                             // child: Column(
                             //   mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +88,6 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     children: const <Widget>[
                       Expanded(
-                        // flex: 1,
                         child: PostsPage(
                             // child: Column(
                             //   mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +99,6 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     children: const <Widget>[
                       Expanded(
-                        // flex: 1,
                         child: PostsPage(
                             // child: Column(
                             //   mainAxisAlignment: MainAxisAlignment.center,

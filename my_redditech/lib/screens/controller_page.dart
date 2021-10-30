@@ -11,9 +11,6 @@ class PostsPage extends StatefulWidget {
   final int startingIndex;
   final String source;
 
-  void fetchRightFlux(BuildContext context) async =>
-      {Provider.of<PostsState>(context).fetchPosts(source: source)};
-
   @override
   _PostsPageState createState() => _PostsPageState();
 }

@@ -14,24 +14,27 @@ class PostsState with ChangeNotifier {
       content.refreshComments();
       contentList.add(content);
     }, onDone: () {
+      setBusy(value: false);
       notifyListeners();
     });
   }
 
   late StreamController<UserContent> controller;
   List<Submission> contentList = [];
+  bool _isLoading = false;
   String currentSource = "front page";
 
   List<Submission> get contents => List.from(contentList);
+  bool get isLoading => _isLoading;
 
-  void fetchPosts({
+  Future<void> fetchPosts({
     String? source,
     int maxLoaded = 30,
     bool loadMore = false,
-  }) {
+  }) async {
+    setBusy();
     source = source ?? currentSource;
     if (!loadMore) contentList.clear();
-
     setSource(source);
     notifyListeners();
 
@@ -63,11 +66,16 @@ class PostsState with ChangeNotifier {
             );
         break;
     }
-    controller.addStream(stream);
+    await controller.addStream(stream);
   }
 
   void setSource(String source) {
     currentSource = source;
+    notifyListeners();
+  }
+
+  void setBusy({bool value = true}) {
+    _isLoading = value;
     notifyListeners();
   }
 

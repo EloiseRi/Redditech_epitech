@@ -20,7 +20,11 @@ class _VideoTypeState extends State<VideoType> {
   @override
   void initState() {
     super.initState();
-    _player = VideoPlayerController.network(_post.url.toString());
+    String url = _post.url.toString().contains('v.redd.it')
+        ? _post.url.toString() + '/DASH_96.mp4'
+        : _post.url.toString();
+    print(url);
+    _player = VideoPlayerController.network(url);
     _player!.initialize();
     _chewie = ChewieController(
         videoPlayerController: _player!,

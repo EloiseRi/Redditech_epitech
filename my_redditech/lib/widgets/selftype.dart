@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:html_unescape/html_unescape.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SelfType extends StatelessWidget {
   final String content;

@@ -93,6 +93,7 @@ class _DisplayPost extends State<DisplayPost> {
     }
     return Column(
       children: [
+        Text(_post!.title),
         widget,
       ],
     );

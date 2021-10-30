@@ -1,7 +1,7 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
-import 'package:my_redditech/screens/controller_page.dart';
 import 'package:my_redditech/states/global_state.dart';
+import 'package:my_redditech/utils/name_tabs.dart';
 import 'package:provider/provider.dart';
 
 class SubProfil extends StatelessWidget {
@@ -48,7 +48,7 @@ class _PageProfilState extends State<PageProfil> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: DefaultTabController(
-          length: tabs.length,
+          length: tabsSubProfil.length,
           child: Builder(builder: (BuildContext context) {
             final TabController tabController =
                 DefaultTabController.of(context)!;
@@ -89,7 +89,7 @@ class _PageProfilState extends State<PageProfil> {
                                               .difference(redditor.createdUtc!))
                                           .inDays
                                           .toString() +
-                                      " j · " +
+                                      " d · " +
                                       (DateTime.now().day.toString()) +
                                       " " +
                                       (DateTime.now().month.toString()) +
@@ -97,7 +97,7 @@ class _PageProfilState extends State<PageProfil> {
                                       (DateTime.now().year.toString()) +
                                       " · " +
                                       subcribers +
-                                      " abonné(e)",
+                                      " subscriber(s)",
                                   style: const TextStyle(fontSize: 12)),
                             ],
                           ),
@@ -118,7 +118,7 @@ class _PageProfilState extends State<PageProfil> {
                     centerTitle: true,
                     backgroundColor: widget.color,
                     bottom: const TabBar(
-                      tabs: tabs,
+                      tabs: tabsSubProfil,
                       labelColor: Colors.black,
                     ),
                   )),
@@ -127,13 +127,13 @@ class _PageProfilState extends State<PageProfil> {
                   Column(
                     children: const [
                       Padding(padding: EdgeInsets.only(top: 50)),
-                      Text('Wouah, c\'est vide'),
+                      Text('Ohh No, It\'s empty'),
                     ],
                   ),
                   Column(
                     children: const [
                       Padding(padding: EdgeInsets.only(top: 50)),
-                      Text('Wouah, c\'est vide'),
+                      Text('Ohh No, It\'s empty'),
                     ],
                   ),
                   SizedBox(
@@ -147,12 +147,12 @@ class _PageProfilState extends State<PageProfil> {
                               padding: EdgeInsets.only(
                                   left: media.aspectRatio * 60)),
                           Text(
-                              'Karma de publications: ' +
+                              'Karma publication: ' +
                                   redditor.data!['link_karma'].toString(),
                               style: const TextStyle(fontSize: 12)),
                           const Padding(padding: EdgeInsets.only(left: 15)),
                           Text(
-                            'Karma de commentaires: ' +
+                            'Karma comments: ' +
                                 redditor.data!['comment_karma'].toString(),
                             style: const TextStyle(fontSize: 12),
                           ),

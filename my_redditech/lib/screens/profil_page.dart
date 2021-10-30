@@ -62,7 +62,7 @@ class NavigationDrawer extends StatelessWidget {
                   Text((DateTime.now().difference(redditor.createdUtc!))
                           .inDays
                           .toString() +
-                      " j"),
+                      " d"),
                   const Text('Âge Reddit'),
                 ],
               ),
@@ -71,19 +71,19 @@ class NavigationDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             buildMenuItem(
-                text: 'Mon profil',
+                text: 'Profil',
                 icon: Icons.face_retouching_natural_sharp,
                 onClicked: () => selectedItem(context, 0)),
             buildMenuItem(
-                text: 'Créer une communauté',
+                text: 'Create a community',
                 icon: Icons.people,
                 onClicked: () => selectedItem(context, 1)),
             buildMenuItem(
-                text: 'Pièces Reddit',
+                text: 'Gold Reddit',
                 icon: Icons.monetization_on_outlined,
                 onClicked: () => selectedItem(context, 2)),
             buildMenuItem(
-                text: 'Sauvegardé',
+                text: 'Saved',
                 icon: Icons.bookmark_rounded,
                 onClicked: () => selectedItem(context, 3)),
             const SizedBox(

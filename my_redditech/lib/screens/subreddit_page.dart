@@ -1,6 +1,6 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
-import 'package:my_redditech/screens/controller_page.dart';
+import 'package:my_redditech/utils/name_tabs.dart';
 
 class SubredditPage extends StatefulWidget {
   SubredditPage({Key? key, required this.subreddit}) : super(key: key);
@@ -22,12 +22,11 @@ class _SubredditPageState extends State<SubredditPage> {
       image = 'https://zupimages.net/up/21/43/6k02.png';
     }
 
-    final media = MediaQuery.of(context).size;
     return SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: DefaultTabController(
-          length: tabs.length,
+          length: tabsSubProfil.length,
           child: Builder(builder: (BuildContext context) {
             final TabController tabController =
                 DefaultTabController.of(context)!;
@@ -86,7 +85,7 @@ class _SubredditPageState extends State<SubredditPage> {
                     centerTitle: true,
                     backgroundColor: Colors.white,
                     bottom: const TabBar(
-                      tabs: tabs,
+                      tabs: tabsSubProfil,
                       labelColor: Colors.black,
                     ),
                   )),
@@ -95,23 +94,23 @@ class _SubredditPageState extends State<SubredditPage> {
                   Column(
                     children: const [
                       Padding(padding: EdgeInsets.only(top: 50)),
-                      Text('Wouah, c\'est vide'),
+                      Text('Ohh No, It\'s empty'),
                     ],
                   ),
                   Column(
                     children: const [
                       Padding(padding: EdgeInsets.only(top: 50)),
-                      Text('Wouah, c\'est vide'),
+                      Text('Ohh No, It\'s empty'),
                     ],
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     child: Column(
-                      children: [
-                        const Padding(padding: EdgeInsets.only(top: 30)),
-                        const Padding(padding: EdgeInsets.all(10)),
-                        const Divider(
+                      children: const [
+                        Padding(padding: EdgeInsets.only(top: 30)),
+                        Padding(padding: EdgeInsets.all(10)),
+                        Divider(
                           color: Colors.black,
                           thickness: 1,
                         )

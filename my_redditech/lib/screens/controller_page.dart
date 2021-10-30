@@ -4,12 +4,6 @@ import 'package:my_redditech/models/title_post.dart';
 import 'package:my_redditech/states/posts_state.dart';
 import 'package:provider/provider.dart';
 
-const List<Tab> tabs = <Tab>[
-  Tab(text: 'Publications'),
-  Tab(text: 'Commentaires'),
-  Tab(text: 'À propos'),
-];
-
 class PostsPage extends StatefulWidget {
   const PostsPage({Key? key, required this.startingIndex}) : super(key: key);
   final int startingIndex;
@@ -37,8 +31,8 @@ class _PostsPageState extends State<PostsPage> {
               },
               child: StreamBuilder(
                 stream: state.controller.stream,
-                builder: (context, snapshot) => PageView.builder(
-                    pageSnapping: false,
+                builder: (context, snapshot) => ListView.builder(
+                    // pageSnapping: false,
                     controller: _controller,
                     scrollDirection: Axis.vertical,
                     itemCount: state.contentList.length,
@@ -48,7 +42,7 @@ class _PostsPageState extends State<PostsPage> {
                       return SingleChildScrollView(
                         child: Center(
                           child: TitlePost(
-                            post: post, 
+                            post: post,
                           ),
                         ),
                       );

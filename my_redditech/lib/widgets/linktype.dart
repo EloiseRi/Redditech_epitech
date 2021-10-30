@@ -19,7 +19,7 @@ class _LinkTypeState extends State<LinkType> {
   Future<dynamic> _fetchData() async {
     try {
       var response = await http.get(_post.url);
-      var document = responseToDocument(response);
+      var document = MetadataFetch.responseToDocument(response);
       var data = MetadataParser.parse(document);
     } catch (e) {
       print("Error");

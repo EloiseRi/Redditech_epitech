@@ -58,6 +58,7 @@ class _DisplayPost extends State<DisplayPost> {
         widget = VideoType(post: _post!);
         break;
       case 'videoGType':
+        widget = VideoType(post: _post!);
         break;
       case 'imageType':
         widget = ImageType(

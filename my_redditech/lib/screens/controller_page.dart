@@ -10,6 +10,10 @@ class PostsPage extends StatefulWidget {
       : super(key: key);
   final int startingIndex;
   final String source;
+
+  void fetchRightFlux(BuildContext context) async =>
+      {Provider.of<PostsState>(context).fetchPosts(source: source)};
+
   @override
   _PostsPageState createState() => _PostsPageState();
 }
@@ -21,10 +25,6 @@ class _PostsPageState extends State<PostsPage> {
   void initState() {
     super.initState();
     _controller = PageController();
-  }
-
-  Future<void> fetchRightFlux() async {
-    await Provider.of<PostsState>(context).fetchPosts(source: widget.source);
   }
 
   @override

@@ -27,11 +27,11 @@ class PostsState with ChangeNotifier {
   List<Submission> get contents => List.from(contentList);
   bool get isLoading => _isLoading;
 
-  Future<void> fetchPosts({
+  void fetchPosts({
     String? source,
     int maxLoaded = 30,
     bool loadMore = false,
-  }) async {
+  }) {
     setBusy();
     source = source ?? currentSource;
     if (!loadMore) contentList.clear();
@@ -66,7 +66,7 @@ class PostsState with ChangeNotifier {
             );
         break;
     }
-    await controller.addStream(stream);
+    controller.addStream(stream);
   }
 
   void setSource(String source) {

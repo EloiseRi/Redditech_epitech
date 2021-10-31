@@ -2,20 +2,20 @@ import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
 import 'package:my_redditech/models/display_post.dart';
 import 'package:my_redditech/models/title_post.dart';
-import 'package:my_redditech/screens/controller_page.dart';
+import 'package:my_redditech/screens/posts_page.dart';
 import 'package:my_redditech/states/posts_state.dart';
 import 'package:my_redditech/utils/name_tabs.dart';
 import 'package:provider/provider.dart';
 
-class SubredditPage extends StatefulWidget {
-  SubredditPage({Key? key, required this.subreddit}) : super(key: key);
+class SubRedditPage extends StatefulWidget {
+  SubRedditPage({Key? key, required this.subreddit}) : super(key: key);
   Subreddit subreddit;
 
   @override
-  State<SubredditPage> createState() => _SubredditPageState();
+  State<SubRedditPage> createState() => _SubRedditPageState();
 }
 
-class _SubredditPageState extends State<SubredditPage> {
+class _SubRedditPageState extends State<SubRedditPage> {
   late PageController _controller;
   bool shouldPop = true;
   @override
@@ -104,7 +104,9 @@ class _SubredditPageState extends State<SubredditPage> {
                   flexibleSpace: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(banner!),
+                        image: NetworkImage(
+                          banner!,
+                        ),
                         fit: BoxFit.none,
                         alignment: Alignment.topLeft,
                       ),

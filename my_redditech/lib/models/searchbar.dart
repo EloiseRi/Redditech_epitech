@@ -91,7 +91,7 @@ class _SearchBar extends State<SearchBar> {
                     Provider.of<PostsState>(context, listen: false)
                         .fetchPosts(source: suggestion.displayName);
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SubredditPage(
+                      builder: (context) => SubRedditPage(
                         subreddit: suggestion,
                       ),
                     ));

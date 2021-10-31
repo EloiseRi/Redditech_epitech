@@ -1,7 +1,7 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_redditech/screens/controller_page.dart';
+import 'package:my_redditech/screens/posts_page.dart';
 import 'package:my_redditech/states/posts_state.dart';
 import 'package:my_redditech/widgets/gfycattype.dart';
 import 'package:my_redditech/widgets/imagetype.dart';

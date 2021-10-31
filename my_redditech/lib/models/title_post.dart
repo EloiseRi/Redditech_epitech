@@ -34,9 +34,7 @@ class TitlePost extends StatelessWidget {
                 Text("u/" +
                     post.data!['author'] +
                     " · " +
-                    (DateTime.now().difference(post.createdUtc))
-                        .inHours
-                        .toString() +
+                    post.createdUtc.hour.toString() +
                     "h"),
               ],
             )

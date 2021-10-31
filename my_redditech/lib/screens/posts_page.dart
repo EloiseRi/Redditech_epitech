@@ -67,6 +67,8 @@ class _PostsPageState extends State<PostsPage> {
                                     post: post,
                                     loadMore: loadMore,
                                   ),
+                                  const Padding(
+                                      padding: EdgeInsets.only(bottom: 10)),
                                 ],
                               ))
                         ]),

@@ -1,5 +1,6 @@
 import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_redditech/models/display_post.dart';
 import 'package:my_redditech/models/title_post.dart';
 import 'package:my_redditech/screens/posts_page.dart';
@@ -78,8 +79,8 @@ class _SubRedditPageState extends State<SubRedditPage> {
                         height: MediaQuery.of(context).size.height,
                         child: Column(
                           children: [
-                            Padding(padding: EdgeInsets.only(top: 30)),
-                            Padding(padding: EdgeInsets.all(10)),
+                            const Padding(padding: EdgeInsets.only(top: 30)),
+                            const Padding(padding: EdgeInsets.all(10)),
                             Expanded(
                               child: Text(
                                 widget.subreddit.data!['public_description'] ??
@@ -107,29 +108,37 @@ class _SubRedditPageState extends State<SubRedditPage> {
                         image: NetworkImage(
                           banner!,
                         ),
-                        fit: BoxFit.none,
+                        fit: BoxFit.contain,
                         alignment: Alignment.topLeft,
                       ),
                     ),
                     child: Column(
                       children: [
-                        CircleAvatar(
-                          radius: 55,
-                          child: Image.network(
-                            image!,
-                          ),
-                          backgroundColor: Colors.grey.shade200,
-                        ),
-                        const Padding(padding: EdgeInsets.only(top: 20)),
-                        Text(
-                          'r/' + widget.subreddit.displayName,
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
+                        const Padding(padding: EdgeInsets.only(top: 100)),
+                        Row(
+                          children: [
+                            const Padding(padding: EdgeInsets.only(left: 10)),
+                            CircleAvatar(
+                              radius: 30,
+                              child: Image.network(
+                                image!,
+                              ),
+                              backgroundColor: Colors.grey.shade200,
+                            ),
+                            const Padding(padding: EdgeInsets.only(top: 20)),
+                            Text(
+                              '  r/' + widget.subreddit.displayName,
+                              textAlign: TextAlign.start,
+                              style: const TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            const Padding(padding: EdgeInsets.only(left: 10)),
                             Text(
                                 widget.subreddit.data!['subscribers']
                                         .toString() +

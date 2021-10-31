@@ -34,113 +34,118 @@ class _SubredditPageState extends State<SubredditPage> {
     } else {
       image = 'https://zupimages.net/up/21/43/6k02.png';
     }
+
     String? banner;
-    if (Uri.parse(widget.subreddit.data!['banner_background_image'])
+    if (Uri.parse(widget.subreddit.data?['banner_background_image'])
         .isAbsolute) {
       banner = Uri.parse(
-              widget.subreddit.data!['banner_background_image'],
+              widget.subreddit.data?['banner_background_image'],
               0,
-              widget.subreddit.data!['banner_background_image']
+              widget.subreddit.data?['banner_background_image']
                   .toString()
                   .indexOf('?'))
           .toString();
     } else {
       banner =
-          'https://styles.redditmedia.com/t5_2qh1o/styles/bannerBackgroundImage_wmbf6g1dei301.png';
+          'https://styles.redditmedia.com/t5_2r0ij/styles/bannerBackgroundImage_6gx1wewyz5x11.jpg';
     }
-    String? url =
-        'https://styles.redditmedia.com/t5_2qh1o/styles/bannerBackgroundImage_wmbf6g1dei301.png';
+
     return SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: DefaultTabController(
-          length: tabsSubreddit.length,
-          child: Builder(builder: (BuildContext context) {
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: DefaultTabController(
+        length: tabsSubreddit.length,
+        child: Builder(
+          builder: (BuildContext context) {
             final TabController tabController =
                 DefaultTabController.of(context)!;
             tabController.addListener(() {});
             return Scaffold(
-              appBar: PreferredSize(
-                  preferredSize: const Size.fromHeight(300.0),
-                  child: AppBar(
-                    toolbarHeight: 100,
-                    flexibleSpace: Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 0),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 55,
-                            child: Image.network(
-                              image!,
-                            ),
-                            backgroundColor: Colors.grey.shade200,
-                          ),
-                          const Padding(padding: EdgeInsets.only(top: 20)),
-                          Text(
-                            'r/' + widget.subreddit.displayName,
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                  widget.subreddit.data!['subscribers']
-                                          .toString() +
-                                      ' members',
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 12)),
-                            ],
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 10),
-                          ),
-                          Container(
-                            constraints: const BoxConstraints(
-                              minHeight: 50,
-                              minWidth: 50,
-                              maxHeight: 50,
-                              maxWidth: 400,
-                            ),
-                            child: Text(
-                              widget.subreddit.data!['public_description'] ??
-                                  '',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
+              body: Stack(
+                children: <Widget>[
+                  TabBarView(
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          Expanded(
+                              child: PostsPage(
+                                  startingIndex: 0,
+                                  source: widget.subreddit.displayName))
                         ],
                       ),
-                    ),
-                    foregroundColor: Colors.black,
-                    centerTitle: true,
-                    backgroundColor: Colors.white,
-                    bottom: const TabBar(
-                      tabs: tabsSubreddit,
-                      labelColor: Colors.black,
-                    ),
-                  )),
-              body: TabBarView(
-                children: [
-                  Column(
-                    children: <Widget>[
-                      Expanded(
-                          child: PostsPage(
-                              startingIndex: 0,
-                              source: widget.subreddit.displayName))
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: Column(
+                          children: [
+                            Padding(padding: EdgeInsets.only(top: 30)),
+                            Padding(padding: EdgeInsets.all(10)),
+                            Expanded(
+                              child: Text(
+                                widget.subreddit.data!['public_description'] ??
+                                    '',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
+                ],
+              ),
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(300.0),
+                child: AppBar(
+                  toolbarHeight: 100,
+                  flexibleSpace: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(banner!),
+                        fit: BoxFit.none,
+                        alignment: Alignment.topLeft,
+                      ),
+                    ),
                     child: Column(
                       children: [
-                        Padding(padding: EdgeInsets.only(top: 30)),
-                        Padding(padding: EdgeInsets.all(10)),
-                        Expanded(
+                        CircleAvatar(
+                          radius: 55,
+                          child: Image.network(
+                            image!,
+                          ),
+                          backgroundColor: Colors.grey.shade200,
+                        ),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        Text(
+                          'r/' + widget.subreddit.displayName,
+                          style: const TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                                widget.subreddit.data!['subscribers']
+                                        .toString() +
+                                    ' members',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 12)),
+                          ],
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 10),
+                        ),
+                        Container(
+                          constraints: const BoxConstraints(
+                            minHeight: 50,
+                            minWidth: 50,
+                            maxHeight: 50,
+                            maxWidth: 400,
+                          ),
                           child: Text(
                             widget.subreddit.data!['public_description'] ?? '',
                             textAlign: TextAlign.center,
@@ -149,17 +154,73 @@ class _SubredditPageState extends State<SubredditPage> {
                             ),
                           ),
                         ),
-                        // Divider(
-                        //   color: Colors.black,
-                        //   thickness: 1,
-                        // )
                       ],
                     ),
                   ),
-                ],
+
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 40, left: 0),
+                  //   child: Column(
+                  //     children: [
+                  //       CircleAvatar(
+                  //         radius: 55,
+                  //         child: Image.network(
+                  //           image!,
+                  //         ),
+                  //         backgroundColor: Colors.grey.shade200,
+                  //       ),
+                  //       const Padding(padding: EdgeInsets.only(top: 20)),
+                  //       Text(
+                  //         'r/' + widget.subreddit.displayName,
+                  //         style: const TextStyle(
+                  //           fontSize: 20,
+                  //         ),
+                  //       ),
+                  //       Row(
+                  //         crossAxisAlignment: CrossAxisAlignment.center,
+                  //         children: [
+                  //           Text(
+                  //               widget.subreddit.data!['subscribers']
+                  //                       .toString() +
+                  //                   ' members',
+                  //               textAlign: TextAlign.center,
+                  //               style: const TextStyle(fontSize: 12)),
+                  //         ],
+                  //       ),
+                  //       const Padding(
+                  //         padding: EdgeInsets.only(top: 10),
+                  //       ),
+                  //       Container(
+                  //         constraints: const BoxConstraints(
+                  //           minHeight: 50,
+                  //           minWidth: 50,
+                  //           maxHeight: 50,
+                  //           maxWidth: 400,
+                  //         ),
+                  //         child: Text(
+                  //           widget.subreddit.data!['public_description'] ?? '',
+                  //           textAlign: TextAlign.center,
+                  //           style: const TextStyle(
+                  //             fontSize: 12,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // // foregroundColor: Colors.black,
+                  centerTitle: true,
+                  backgroundColor: Colors.white,
+                  bottom: const TabBar(
+                    tabs: tabsSubreddit,
+                    labelColor: Colors.black,
+                  ),
+                ),
               ),
             );
-          }),
-        ));
+          },
+        ),
+      ),
+    );
   }
 }

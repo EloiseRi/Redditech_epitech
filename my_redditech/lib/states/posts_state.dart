@@ -22,7 +22,7 @@ class PostsState with ChangeNotifier {
   late StreamController<UserContent> controller;
   List<Submission> contentList = [];
   bool _isLoading = false;
-  String currentSource = "front page";
+  String currentSource = 'new';
 
   List<Submission> get contents => List.from(contentList);
   bool get isLoading => _isLoading;
